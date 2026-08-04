@@ -125,7 +125,7 @@ export function getSeoConfig(): SeoConfig {
 export function generateSeoMetadata(): Metadata {
   const seo = getSeoConfig();
 
-  const verification: Record<string, string> = {};
+  const verification: Metadata["verification"] = {};
   if (seo.googleSiteVerification) {
     verification.google = seo.googleSiteVerification;
   }

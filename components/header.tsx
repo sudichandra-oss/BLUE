@@ -12,9 +12,21 @@ export function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setIsMenuOpen(false);
+    };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -79,7 +91,9 @@ export function Header() {
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 transition-colors lg:hidden text-foreground hover:text-accent rounded-full"
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -88,7 +102,7 @@ export function Header() {
 
       {/* Mobile & Tablet Dropdown Menu */}
       {isMenuOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-lg px-6 py-8 lg:hidden rounded-b-2xl shadow-xl">
+        <div id="mobile-navigation" className="border-t border-border bg-background/95 backdrop-blur-lg px-6 py-8 lg:hidden rounded-b-2xl shadow-xl">
           <nav className="flex flex-col gap-5">
             <Link
               href="#about"
