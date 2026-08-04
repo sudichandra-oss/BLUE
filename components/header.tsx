@@ -31,19 +31,19 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed left-0 top-0 z-50 w-full max-w-none transition-all duration-300 lg:left-[5%] lg:top-4 lg:w-[90%] lg:max-w-none ${isScrolled ? "bg-background/95 shadow-lg backdrop-blur-md lg:rounded-full" : "bg-background/60 backdrop-blur-md lg:rounded-full"}`}
+      className={`fixed top-0 left-0 z-50 w-full max-w-none transition-all duration-300 lg:top-4 lg:left-1/2 lg:w-[90%] lg:max-w-5xl lg:-translate-x-1/2 ${isScrolled ? "bg-background/95 backdrop-blur-md shadow-lg lg:rounded-full" : "bg-background/60 backdrop-blur-md lg:rounded-full"}`}
       style={{
         boxShadow: isScrolled ? "rgba(14, 63, 126, 0.08) 0px 0px 0px 1px, rgba(42, 51, 69, 0.08) 0px 2px 4px -1px, rgba(42, 51, 70, 0.08) 0px 8px 16px -4px" : "none"
       }}
     >
-      <div className="flex min-h-16 items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-between transition-all duration-300 px-3 pl-5 py-2">
         {/* Logo */}
         <Link href="#hero" className="text-base sm:text-lg font-bold tracking-tight transition-colors duration-300 text-foreground whitespace-nowrap flex-shrink-0">
           BLUE<span className="text-accent">.</span>INTERIORS
         </Link>
 
         {/* Desktop Navigation (large screens 1024px+) */}
-        <nav className="hidden min-w-0 items-center justify-center gap-5 xl:gap-8 lg:flex">
+        <nav className="hidden items-center gap-6 xl:gap-8 lg:flex">
           <Link
             href="#about"
             className="whitespace-nowrap text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
