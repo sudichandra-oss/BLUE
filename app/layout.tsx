@@ -1,32 +1,33 @@
 import React from "react"
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { generateSeoMetadata, generateJsonLdSchema } from '@/lib/seo-config'
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 
-export const metadata: Metadata = {
-  title: 'BLUE Interiors',
-  description: 'Trusted interior designers in Bangalore since 2011. Luxury modular kitchens, bedrooms, and full home interiors.',
-  generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+export function generateMetadata(): Metadata {
+  return {
+    ...generateSeoMetadata(),
+    generator: 'BLUE Interiors',
+    icons: {
+      icon: [
+        {
+          url: '/icon.svg',
+          type: 'image/svg+xml',
+        },
+        {
+          url: '/icon-light-32x32.png',
+          media: '(prefers-color-scheme: light)',
+        },
+        {
+          url: '/icon-dark-32x32.png',
+          media: '(prefers-color-scheme: dark)',
+        },
+      ],
+      apple: '/apple-icon.png',
+    },
+  };
 }
 
 export default function RootLayout({
@@ -34,11 +35,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = generateJsonLdSchema();
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   )

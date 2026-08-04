@@ -21,7 +21,8 @@ function ScrollRevealText({ text }: { text: string }) {
       const totalDistance = startOffset - endOffset;
       const currentPosition = startOffset - rect.top;
       
-      const newProgress = Math.max(0, Math.min(1, currentPosition / totalDistance));
+      const rawProgress = totalDistance > 0 ? currentPosition / totalDistance : 0;
+      const newProgress = Math.max(0, Math.min(1, Number.isNaN(rawProgress) ? 0 : rawProgress));
       setProgress(newProgress);
     };
 
@@ -96,16 +97,17 @@ export function TechnologySection() {
       if (!sectionRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
-      const scrollableHeight = window.innerHeight * 4; // Increased for 3 text cycles
+      const scrollableHeight = (window.innerHeight || 800) * 4; // Increased for 3 text cycles
       const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
+      const rawProgress = scrollableHeight > 0 ? scrolled / scrollableHeight : 0;
+      const progress = Math.max(0, Math.min(1, Number.isNaN(rawProgress) ? 0 : rawProgress));
       
       setScrollProgress(progress);
 
       // Text scroll progress
       if (textSectionRef.current) {
         const textRect = textSectionRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+        const windowHeight = window.innerHeight || 800;
         
         const startOffset = windowHeight * 0.9;
         const endOffset = windowHeight * 0.1;
@@ -113,7 +115,8 @@ export function TechnologySection() {
         const totalDistance = startOffset - endOffset;
         const currentPosition = startOffset - textRect.top;
         
-        const newTextProgress = Math.max(0, Math.min(1, currentPosition / totalDistance));
+        const rawTextProgress = totalDistance > 0 ? currentPosition / totalDistance : 0;
+        const newTextProgress = Math.max(0, Math.min(1, Number.isNaN(rawTextProgress) ? 0 : rawTextProgress));
         setTextProgress(newTextProgress);
       }
     };

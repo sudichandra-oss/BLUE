@@ -31,17 +31,22 @@ export function HeroSection() {
           
           const rect = sectionRef.current.getBoundingClientRect();
           const scrolled = -rect.top;
-          const scrollableHeight = window.innerHeight * 2;
-          const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
+          const scrollableHeight = (window.innerHeight || 800) * 2;
+          const rawProgress = scrollableHeight > 0 ? scrolled / scrollableHeight : 0;
+          const progress = Math.max(0, Math.min(1, Number.isNaN(rawProgress) ? 0 : rawProgress));
           
           // Text fades out during first 30% of scroll
-          const textOpacity = Math.max(0, 1 - progress / 0.3);
+          const rawTextOpacity = Math.max(0, Math.min(1, 1 - progress / 0.3));
+          const textOpacity = Number.isNaN(rawTextOpacity) ? 1 : rawTextOpacity;
+
           // Bento animation starts at 30%, completes at 100%
-          const imageProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.7));
+          const rawImageProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.7));
+          const imageProgress = Number.isNaN(rawImageProgress) ? 0 : rawImageProgress;
 
           const centerWidth = 100 - imageProgress * 78;
           const sideWidth = imageProgress * 39;
-          const sideOpacity = Math.min(1, imageProgress * 1.5);
+          const rawSideOpacity = Math.min(1, Math.max(0, imageProgress * 1.5));
+          const sideOpacity = Number.isNaN(rawSideOpacity) ? 0 : rawSideOpacity;
           const gap = imageProgress * 6;
 
           if (centerRef.current) centerRef.current.style.width = `${centerWidth}%`;

@@ -33,19 +33,18 @@ export function FooterSection() {
           Build Premium Quality &amp; Luxury Interiors
         </h2>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="https://blueinteriors.in/contact/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-accent px-8 py-3 text-sm uppercase tracking-widest text-white transition-all hover:bg-accent/90"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent("openConsultationModal"))}
+            className="inline-flex items-center gap-2 bg-accent px-8 py-3 text-sm font-medium uppercase tracking-widest text-white transition-all hover:bg-accent/90 shadow-lg cursor-pointer"
           >
             Book Free Consultation
-          </a>
+          </button>
           <a
             href="https://wa.me/918123387210"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-white/30 px-8 py-3 text-sm uppercase tracking-widest text-white transition-all hover:border-white"
+            className="inline-flex items-center gap-2 border border-white/30 px-8 py-3 text-sm font-medium uppercase tracking-widest text-white transition-all hover:border-white"
           >
             WhatsApp Us
           </a>

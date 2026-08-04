@@ -19,13 +19,14 @@ export function GallerySection() {
     if (!galleryRef.current) return;
     
     const rect = galleryRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const sectionHeight = galleryRef.current.offsetHeight;
+    const windowHeight = window.innerHeight || 800;
+    const sectionHeight = galleryRef.current.offsetHeight || 1000;
     
     // Calculate scroll progress through the section
     const scrollableRange = sectionHeight - windowHeight;
     const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+    const rawProgress = scrollableRange > 0 ? scrolled / scrollableRange : 0;
+    const progress = Math.max(0, Math.min(1, Number.isNaN(rawProgress) ? 0 : rawProgress));
     
     setScrollProgress(progress);
   }, []);

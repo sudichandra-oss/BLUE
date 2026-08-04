@@ -8,6 +8,9 @@ import { CollectionSection } from "@/components/sections/collection-section";
 import { EditorialSection } from "@/components/sections/editorial-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { FooterSection } from "@/components/sections/footer-section";
+import { SeoModal } from "@/components/seo-modal";
+import { ConsultationModal } from "@/components/consultation-modal";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 
 export default function Home() {
   return (
@@ -22,6 +25,9 @@ export default function Home() {
       <EditorialSection />
       <TestimonialsSection />
       <FooterSection />
+      <SeoModal />
+      <ConsultationModal />
+      <WhatsAppButton />
     </main>
   );
 }

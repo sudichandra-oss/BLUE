@@ -20,13 +20,14 @@ export function PhilosophySection() {
     if (!sectionRef.current) return;
     
     const rect = sectionRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const sectionHeight = sectionRef.current.offsetHeight;
+    const windowHeight = window.innerHeight || 800;
+    const sectionHeight = sectionRef.current.offsetHeight || 1000;
     
     // Calculate progress based on scroll position
     const scrollableRange = sectionHeight - windowHeight;
     const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+    const rawProgress = scrollableRange > 0 ? scrolled / scrollableRange : 0;
+    const progress = Math.max(0, Math.min(1, Number.isNaN(rawProgress) ? 0 : rawProgress));
     
     // Title rotates through 3 texts based on scroll progress
     setTitleOpacity(progress);
@@ -40,9 +41,11 @@ export function PhilosophySection() {
       // Start animation when element enters viewport
       const startTrigger = windowHeight * 0.8;
       const endTrigger = windowHeight * 0.2;
+      const triggerRange = startTrigger - endTrigger;
       
       if (descTop < startTrigger && descTop > endTrigger - descHeight) {
-        const descProgress = Math.max(0, Math.min(1, (startTrigger - descTop) / (startTrigger - endTrigger)));
+        const rawDescProgress = triggerRange > 0 ? (startTrigger - descTop) / triggerRange : 0;
+        const descProgress = Math.max(0, Math.min(1, Number.isNaN(rawDescProgress) ? 0 : rawDescProgress));
         setDescriptionProgress(descProgress);
       }
     }
@@ -146,7 +149,8 @@ export function PhilosophySection() {
           
           <p className="mt-8 leading-relaxed text-muted-foreground text-3xl text-center">
             {("With over 15 years of experience and 5,000+ happy homes delivered, Blue Interiors blends design excellence, German precision, and trust into every home we build — from compact 2 BHK apartments to premium villas.").split(" ").map((word, index, array) => {
-              const wordProgress = Math.max(0, Math.min(1, (descriptionProgress * array.length) - index));
+              const rawWordProgress = Math.max(0, Math.min(1, (descriptionProgress * array.length) - index));
+              const wordProgress = Number.isNaN(rawWordProgress) ? 0 : rawWordProgress;
               const opacity = wordProgress;
               const blur = (1 - wordProgress) * 40;
               

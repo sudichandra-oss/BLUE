@@ -1,0 +1,30 @@
+# ==============================================================================
+# BLUE INTERIORS - SEO & GOOGLE SEARCH CONFIGURATION
+# ==============================================================================
+# You can edit the keys below at any time to update Search Engine Optimization 
+# for Google, Bing, Yahoo, Open Graph, WhatsApp previews, and Social Media.
+#
+# INSTRUCTIONS:
+# 1. Open this file (seo-config.txt) in any text editor or file explorer.
+# 2. Modify any value on the right side of the '=' sign.
+# 3. Save the file. The website will automatically use your updated SEO settings.
+# ==============================================================================
+
+SITE_TITLE = BLUE Interiors | Luxury Interior Designers in Bangalore
+SITE_DESCRIPTION = Trusted interior designers in Bangalore since 2011. Modern modular kitchens, luxury master bedrooms, living rooms, wardrobes, and complete 100% turnkey home interiors with 10-year warranty.
+SEO_KEYWORDS = interior designers in bangalore, luxury interior designers, modular kitchen bangalore, blue interiors bangalore, home interior design, turnkey interior design, best interior designers bangalore, interior design cost bangalore, modular wardrobe bangalore
+CANONICAL_URL = https://blueinteriors.in
+OG_IMAGE_URL = /images/hero-living-room.jpg
+
+# Search Engine Console Verification Keys
+# (Paste your site verification token from Google Search Console or Bing Webmaster Tools below)
+GOOGLE_SITE_VERIFICATION = 
+BING_SITE_VERIFICATION = 
+
+# Local Business Schema Data for Google Search Knowledge Graph
+BUSINESS_NAME = BLUE Interiors
+BUSINESS_PHONE = +91 8123387210
+BUSINESS_EMAIL = career.blueinteriors@gmail.com
+BUSINESS_ADDRESS = 2nd floor, Sai Krishna Arcade, 24th Main Rd, BDA Layout, HSR Layout, Bengaluru, Karnataka 560102
+BUSINESS_LATITUDE = 12.9121
+BUSINESS_LONGITUDE = 77.6446
