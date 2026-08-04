@@ -2,14 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import {
-  ClipboardList,
-  House,
-  Lightbulb,
-  Ruler,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { Ruler, Sparkles, Lightbulb, ShieldCheck, ClipboardCheck, Home } from "lucide-react";
 
 const stats = [
   { value: "5000+", label: "Completed Homes" },
@@ -29,37 +22,37 @@ const milestones = [
 const features = [
   {
     icon: Ruler,
-    eyebrow: "Crafted to last",
+    category: "CRAFTED TO LAST",
     title: "Premium Materials",
     description: "Built using BWP 710-grade plywood and branded hardware — designed for longevity.",
   },
   {
     icon: Sparkles,
-    eyebrow: "German precision",
+    category: "GERMAN PRECISION",
     title: "HÄFELE Studio Partner",
     description: "Proudly associated with Häfele, a renowned German brand known for innovative and durable hardware solutions.",
   },
   {
     icon: Lightbulb,
-    eyebrow: "Made personal",
+    category: "MADE PERSONAL",
     title: "Design That Fits You",
     description: "Personalized interiors crafted to match your lifestyle, taste, and space.",
   },
   {
     icon: ShieldCheck,
-    eyebrow: "Peace of mind",
+    category: "PEACE OF MIND",
     title: "10-Year Warranty",
     description: "Peace of mind that lasts long after your interiors are complete.",
   },
   {
-    icon: ClipboardList,
-    eyebrow: "Clear at every step",
+    icon: ClipboardCheck,
+    category: "CLEAR AT EVERY STEP",
     title: "Transparent Process",
     description: "Clear communication, detailed planning, and regular updates at every project stage.",
   },
   {
-    icon: House,
-    eyebrow: "From idea to home",
+    icon: Home,
+    category: "FROM IDEA TO HOME",
     title: "Turnkey Execution",
     description: "100% in-house teams handling everything from concept to completion.",
   },
@@ -135,12 +128,12 @@ export function AboutSection() {
         {/* Image */}
         <div className="relative aspect-square md:aspect-auto md:min-h-[600px]">
           <Image
-            src="/images/blue-hero-interior.png"
+            src="/images/proj-3.jpg"
             alt="Manish Jain — Founder & Creative Director of Blue Interiors"
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
           <div className="absolute bottom-8 left-8 right-8">
             <p className="text-sm uppercase tracking-widest text-accent">Founder & Creative Director</p>
             <h3 className="mt-2 text-3xl font-medium text-white">Manish Jain</h3>
@@ -163,49 +156,64 @@ export function AboutSection() {
             From compact 2 BHK apartments to premium villas, our designs are tailored to match your lifestyle, taste, and budget. Homeowners across Bangalore trust us because we deliver on time, every time.
           </p>
           <div className="mt-10">
-            <a
-              href="https://blueinteriors.in/contact/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-foreground px-8 py-3 text-sm uppercase tracking-widest text-foreground transition-all hover:bg-foreground hover:text-white"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("openConsultationModal"))}
+              className="inline-flex items-center gap-2 border border-foreground px-8 py-3 text-sm font-medium uppercase tracking-widest text-foreground transition-all hover:bg-foreground hover:text-white cursor-pointer shadow-sm"
             >
               Book Free Consultation
-            </a>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Our Strengths */}
-      <div id="expertise" ref={sectionRef} className="px-6 py-20 md:px-12 md:py-28 lg:px-20">
+      {/* Our Strengths / Why Choose Us */}
+      <div id="expertise" ref={sectionRef} className="px-6 py-20 md:px-12 md:py-28 lg:px-20 bg-background">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">Why Choose Us</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent font-semibold">Why Choose Us</p>
             <h2 className="mt-4 text-3xl font-medium tracking-tight text-foreground md:text-4xl lg:text-5xl">
-              Built on Trust & Quality
+              Built on Trust &amp; Quality
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="group rounded-sm border border-border bg-secondary p-8 transition-all duration-300 hover:border-accent hover:shadow-lg"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? "translateY(0)" : "translateY(30px)",
-                  transition: `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`,
-                }}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-accent/40 bg-background text-accent shadow-sm transition-transform duration-300 group-hover:scale-110">
-                    <feature.icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.5} />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((feature, index) => {
+              const IconComp = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="group rounded-2xl border border-[#EBE3D7] bg-[#FAF8F5] dark:bg-card p-8 sm:p-10 transition-all duration-300 hover:border-[#D4A574] hover:shadow-xl flex flex-col justify-between"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                    transition: `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`,
+                  }}
+                >
+                  <div>
+                    {/* Header Row: Circle Icon + Uppercase Category Badge */}
+                    <div className="flex items-center justify-between gap-4 mb-8">
+                      <div className="w-14 h-14 rounded-full bg-white dark:bg-secondary flex items-center justify-center border border-[#E8DFC8] dark:border-border shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                        <IconComp className="w-6 h-6 text-[#D4A574]" strokeWidth={1.6} />
+                      </div>
+                      <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#C49564] dark:text-accent">
+                        {feature.category}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold tracking-tight text-[#0F1B3C] dark:text-foreground mb-3">
+                      {feature.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm sm:text-base leading-relaxed text-muted-foreground font-normal">
+                      {feature.description}
+                    </p>
                   </div>
-                  <span className="pt-2 text-[10px] uppercase tracking-[0.2em] text-accent/80">{feature.eyebrow}</span>
                 </div>
-                <h3 className="mt-8 text-xl font-medium text-foreground">{feature.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -251,3 +259,4 @@ export function AboutSection() {
     </section>
   );
 }
+

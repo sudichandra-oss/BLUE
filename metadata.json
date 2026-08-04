@@ -1,0 +1,8 @@
+{
+  "name": "BLUE Interiors",
+  "description": "Trusted interior designers in Bangalore since 2011. Luxury modular kitchens, bedrooms, and full home interiors.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
