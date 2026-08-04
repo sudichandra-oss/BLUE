@@ -10,7 +10,8 @@ export function WhatsAppButton() {
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[60] flex justify-end px-4 sm:bottom-6 sm:px-6">
+      <div className="pointer-events-auto">
 
       {/* Floating WhatsApp Button */}
       <a
@@ -33,6 +34,7 @@ export function WhatsAppButton() {
           Quick Chat
         </span>
       </a>
+      </div>
     </div>
   );
 }
