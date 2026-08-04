@@ -2,6 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import {
+  ClipboardList,
+  House,
+  Lightbulb,
+  Ruler,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 const stats = [
   { value: "5000+", label: "Completed Homes" },
@@ -20,32 +28,38 @@ const milestones = [
 
 const features = [
   {
-    icon: "🏗️",
+    icon: Ruler,
+    eyebrow: "Crafted to last",
     title: "Premium Materials",
     description: "Built using BWP 710-grade plywood and branded hardware — designed for longevity.",
   },
   {
-    icon: "🇩🇪",
+    icon: Sparkles,
+    eyebrow: "German precision",
     title: "HÄFELE Studio Partner",
     description: "Proudly associated with Häfele, a renowned German brand known for innovative and durable hardware solutions.",
   },
   {
-    icon: "✨",
+    icon: Lightbulb,
+    eyebrow: "Made personal",
     title: "Design That Fits You",
     description: "Personalized interiors crafted to match your lifestyle, taste, and space.",
   },
   {
-    icon: "🛡️",
+    icon: ShieldCheck,
+    eyebrow: "Peace of mind",
     title: "10-Year Warranty",
     description: "Peace of mind that lasts long after your interiors are complete.",
   },
   {
-    icon: "📋",
+    icon: ClipboardList,
+    eyebrow: "Clear at every step",
     title: "Transparent Process",
     description: "Clear communication, detailed planning, and regular updates at every project stage.",
   },
   {
-    icon: "🏠",
+    icon: House,
+    eyebrow: "From idea to home",
     title: "Turnkey Execution",
     description: "100% in-house teams handling everything from concept to completion.",
   },
@@ -182,9 +196,14 @@ export function AboutSection() {
                   transition: `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`,
                 }}
               >
-                <span className="text-3xl">{feature.icon}</span>
-                <h3 className="mt-4 text-lg font-medium text-foreground">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full border border-accent/40 bg-background text-accent shadow-sm transition-transform duration-300 group-hover:scale-110">
+                    <feature.icon aria-hidden="true" className="h-6 w-6" strokeWidth={1.5} />
+                  </div>
+                  <span className="pt-2 text-[10px] uppercase tracking-[0.2em] text-accent/80">{feature.eyebrow}</span>
+                </div>
+                <h3 className="mt-8 text-xl font-medium text-foreground">{feature.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
               </div>
             ))}
           </div>
